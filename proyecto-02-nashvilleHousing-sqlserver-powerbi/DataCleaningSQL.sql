@@ -1,34 +1,34 @@
 /*
 ==========================================================================================================================
----- A) CASO DE NEGOCIO / DISPARADOR DEL STAKEHOLDER (Real Estate Analytics - Nashville Housing)
+---- A) CASO DE NEGOCIO / DISPARADOR DEL STAKEHOLDER
 ==========================================================================================================================
 
 STAKEHOLDER: Director de Operaciones & Inversiones Inmobiliarias.
 
 CONTEXTO & PROBLEMA DE NEGOCIO:
-"La direcciÛn comercial busca identificar oportunidades de inversiÛn y comprender el comportamiento del mercado inmobiliario 
-en el ·rea metropolitana de Nashville. Sin embargo, los datos transaccionales brutos presentan inconsistencias severas, 
-registros duplicados y campos no atÛmicos que impiden construir un tablero confiable y ·gil en Power BI."
+"La direcci√≥n comercial busca identificar oportunidades de inversi√≥n y comprender el comportamiento del mercado inmobiliario 
+en el √°rea metropolitana de Nashville. Sin embargo, los datos transaccionales brutos presentan inconsistencias severas, 
+registros duplicados y campos no at√≥micos que impiden construir un tablero confiable y √°gil en Power BI."
 
 PREGUNTAS:
 
-1. øEn el aÒo 2015 logramos superar el volumen de ventas mes a mes respecto al aÒo 2014, o el mercado se contrajo? 
-øCu·l fue el complejo residencial que concentrÛ la mayor cantidad de ventas durante el 2015?
+1. ¬øEn el a√±o 2015 logramos superar el volumen de ventas mes a mes respecto al a√±o 2014, o el mercado se contrajo? 
+¬øCu√°l fue el complejo residencial que concentr√≥ la mayor cantidad de ventas durante el 2015?
 
-2. Para la ciudad de Nashville, øcu·l fue el uso de suelo (LandUse) m·s revendido y cu·l fue el mayor n˙mero de 
-transacciones que llegÛ a registrar un inmueble individual?
+2. Para la ciudad de Nashville, ¬øcu√°l fue el uso de suelo (LandUse) m√°s revendido y cu√°l fue el mayor n√∫mero de 
+transacciones que lleg√≥ a registrar un inmueble individual?
 
-3. øCu·les son las ciudades que concentran el mayor volumen de transacciones (demanda) en el ·rea metropolitana 
-y cu·les registran el precio de venta promedio m·s elevado?
+3. ¬øCu√°les son las ciudades que concentran el mayor volumen de transacciones (demanda) en el √°rea metropolitana 
+y cu√°les registran el precio de venta promedio m√°s elevado?
 
-4. øQuÈ proporciÛn de propiedades se transfirieron desocupadas frente a las ocupadas y cu·l es la brecha de precio entre ambas?
+4. ¬øQu√© proporci√≥n de propiedades se transfirieron desocupadas frente a las ocupadas y cu√°l es la brecha de precio entre ambas?
 
 ==========================================================================================================================
 */
 
 /*
 ==========================================================================================================================
----- B) Limpieza y TransformaciÛn de Datos en SQL 
+---- B) Limpieza y Transformaci√≥n de Datos en SQL 
 ==========================================================================================================================
 */
 --------------------------------------------------------------------------------------------------------------------------
@@ -61,7 +61,7 @@ FROM PortfolioProject.dbo.NashvilleHousing;
 
  --------------------------------------------------------------------------------------------------------------------------
 
--- 3) Completar los datos faltantes en la direcciÛn de la propiedad (PropertyAddress)
+-- 3) Completar los datos faltantes en la direcci√≥n de la propiedad (PropertyAddress)
 -- Notamos que Property Address es null, lo cual es ilogico porque la propiedad tiene que tener siempre la misma direccion
 SELECT *
 FROM PortfolioProject.dbo.NashvilleHousing
@@ -88,7 +88,7 @@ where A.PropertyAddress is null;
 
 --------------------------------------------------------------------------------------------------------------------------
 
--- 4) Separar la direcciÛn en columnas individuales (DirecciÛn, Ciudad, Estado)
+-- 4) Separar la direcci√≥n en columnas individuales (Direcci√≥n, Ciudad, Estado)
 -- Con PropertyAddress:
 SELECT PropertyAddress
 FROM PortfolioProject.dbo.NashvilleHousing
@@ -219,7 +219,7 @@ Where row_num > 1
 /*
 SaleDate lo reemplazamo en el paso 1) al cambiarle el formato
 OwnerAddress y PropertyAddress los reemplazamos en el paso 3) al separar sus datos.
-TaxDistrict se considerÛ innecesario para futuros analisis.
+TaxDistrict se consider√≥ innecesario para futuros analisis.
 */
 ALTER TABLE PortfolioProject.dbo.NashvilleHousing
 DROP COLUMN OwnerAddress, TaxDistrict, PropertyAddress, SaleDate
@@ -240,25 +240,25 @@ FROM PortfolioProject.dbo.NashvilleHousing;
 
 -- 10) Respuestas a las preguntas del stakeholder fundamentadas con el informe:
 /*
-1. CÛmo se puede visualizar en el grafico de lÌneas, el ritmo comercial habitual mes a mes en 2015 fue 
-estable y similar al de 2014; sin embargo, la facturaciÛn total anual cayÛ porque en 2014 ocurriÛ una 
-operaciÛn atÌpica de $1,54 mil M que inflÛ ese aÒo de manera excepcional y no representaba una tendencia 
-recurrente de mercado. Adem·s 1212 LAUREL ST fue el activo con mayor absorciÛn y volumen de operaciones 
-de ese aÒo (230 transacciones) como se puede observar en el gr·fico de barras apiladas.
+1. C√≥mo se puede visualizar en el grafico de l√≠neas, el ritmo comercial habitual mes a mes en 2015 fue 
+estable y similar al de 2014; sin embargo, la facturaci√≥n total anual cay√≥ porque en 2014 ocurri√≥ una 
+operaci√≥n at√≠pica de $1,54 mil M que infl√≥ ese a√±o de manera excepcional y no representaba una tendencia 
+recurrente de mercado. Adem√°s 1212 LAUREL ST fue el activo con mayor absorci√≥n y volumen de operaciones 
+de ese a√±o (230 transacciones) como se puede observar en el gr√°fico de barras apiladas.
 
-2. En Nashville, el fenÛmeno de reventa se concentra mayoritariamente en residencias para una sola familia, 
-esto se peude ver en el grafico circular donde ocupa el 57,99%. Adem·s el techo de reventas fue de 4 operaciones 
-en el histÛrico analizado.
+2. En Nashville, el fen√≥meno de reventa se concentra mayoritariamente en residencias para una sola familia, 
+esto se peude ver en el grafico circular donde ocupa el 57,99%. Adem√°s el techo de reventas fue de 4 operaciones 
+en el hist√≥rico analizado.
 
-3. Como se observa en el Treemap y en las columnas del Gr·fico inferior, Nashville concentra la gran mayorÌa de 
+3. Como se observa en el Treemap y en las columnas del Gr√°fico inferior, Nashville concentra la gran mayor√≠a de 
 operaciones con 40 mil ventas (40.216 operaciones), seguida muy de lejos por Antioch (6.286) y Hermitage (3.126).
-Adem·s, como muestra la lÌnea del Gr·fico de columnas y lÌneas inferior, los precios m·s elevados corresponden a 
-Nashville con un promedio de $366.625 y a Brentwood con $312.258, contrastando con zonas m·s accesibles como Madison
+Adem√°s, como muestra la l√≠nea del Gr√°fico de columnas y l√≠neas inferior, los precios m√°s elevados corresponden a 
+Nashville con un promedio de $366.625 y a Brentwood con $312.258, contrastando con zonas m√°s accesibles como Madison
 que promedia $136.537.
 
 4. Del total de transacciones analizadas, el 8,28% de las propiedades se transfirieron desocupadas frente al 91,72%
 ocupadas, registrando una brecha de precio promedio de $19.992 a favor de las desocupadas (6,1%), con un valor de 
-cierre promedio de $309.000 frente a los $329.000 de las habitadas como se puede observar en el gr·fico de barras 
+cierre promedio de $309.000 frente a los $329.000 de las habitadas como se puede observar en el gr√°fico de barras 
 apiladas.
 */
 
